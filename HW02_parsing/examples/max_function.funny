@@ -1,0 +1,10 @@
+function max(a: int, b: int) returns result: int
+requires a >= 0 and b >= 0
+ensures result >= a or result >= b
+{
+  if (a > b) {
+    result = a;
+  } else {
+    result = b;
+  }
+}

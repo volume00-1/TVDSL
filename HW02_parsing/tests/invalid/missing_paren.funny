@@ -1,0 +1,5 @@
+function bad(x: int
+    returns y: int
+{
+    y = x;
+}

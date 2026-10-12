@@ -1,0 +1,4 @@
+function recover(x: int) returns y: int {
+    y = x + * 2;
+    y = x + * 3;
+}

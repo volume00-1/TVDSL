@@ -1,0 +1,5 @@
+function copy(a: int[], i: int, x: int) returns r: int {
+  a[i] = x;
+  r = length(a);
+  assert r >= 0;
+}

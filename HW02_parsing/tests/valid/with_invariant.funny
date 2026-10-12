@@ -1,0 +1,21 @@
+function binary_search(a: int[], n: int, target: int)
+    returns result: int
+{
+    result = -1;
+    low = 0;
+    high = n - 1;
+    while (low <= high)
+        invariant 0 <= low and high < n
+    {
+        mid = (low + high) / 2;
+        if (a[mid] == target) {
+            result = mid;
+        } else {
+            if (a[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+    }
+}

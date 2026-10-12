@@ -1,0 +1,6 @@
+function compute(x: int, y: int)
+    returns r: int
+{
+    r = (x + y) * (x - y) + 2 * x / y;
+    assert r >= 0;
+}
