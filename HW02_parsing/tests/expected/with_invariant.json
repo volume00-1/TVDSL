@@ -1,0 +1,222 @@
+{
+  "declarations": [
+    {
+      "name": "binary_search",
+      "params": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "n",
+          "type": "int"
+        },
+        {
+          "name": "target",
+          "type": "int"
+        }
+      ],
+      "returns": [
+        {
+          "name": "result",
+          "type": "int"
+        }
+      ],
+      "requires": null,
+      "ensures": null,
+      "uses": [],
+      "body": {
+        "statements": [
+          {
+            "targets": [
+              {
+                "name": "result"
+              }
+            ],
+            "value": {
+              "op": "-",
+              "operand": {
+                "value": 1
+              }
+            }
+          },
+          {
+            "targets": [
+              {
+                "name": "low"
+              }
+            ],
+            "value": {
+              "value": 0
+            }
+          },
+          {
+            "targets": [
+              {
+                "name": "high"
+              }
+            ],
+            "value": {
+              "op": "-",
+              "left": {
+                "name": "n"
+              },
+              "right": {
+                "value": 1
+              }
+            }
+          },
+          {
+            "condition": {
+              "op": "<=",
+              "left": {
+                "name": "low"
+              },
+              "right": {
+                "name": "high"
+              }
+            },
+            "invariant": {
+              "op": "and",
+              "left": {
+                "op": "<=",
+                "left": {
+                  "value": 0
+                },
+                "right": {
+                  "name": "low"
+                }
+              },
+              "right": {
+                "op": "<",
+                "left": {
+                  "name": "high"
+                },
+                "right": {
+                  "name": "n"
+                }
+              }
+            },
+            "body": {
+              "statements": [
+                {
+                  "targets": [
+                    {
+                      "name": "mid"
+                    }
+                  ],
+                  "value": {
+                    "op": "/",
+                    "left": {
+                      "op": "+",
+                      "left": {
+                        "name": "low"
+                      },
+                      "right": {
+                        "name": "high"
+                      }
+                    },
+                    "right": {
+                      "value": 2
+                    }
+                  }
+                },
+                {
+                  "condition": {
+                    "op": "==",
+                    "left": {
+                      "array": {
+                        "name": "a"
+                      },
+                      "index": {
+                        "name": "mid"
+                      }
+                    },
+                    "right": {
+                      "name": "target"
+                    }
+                  },
+                  "then_branch": {
+                    "statements": [
+                      {
+                        "targets": [
+                          {
+                            "name": "result"
+                          }
+                        ],
+                        "value": {
+                          "name": "mid"
+                        }
+                      }
+                    ]
+                  },
+                  "else_branch": {
+                    "statements": [
+                      {
+                        "condition": {
+                          "op": "<",
+                          "left": {
+                            "array": {
+                              "name": "a"
+                            },
+                            "index": {
+                              "name": "mid"
+                            }
+                          },
+                          "right": {
+                            "name": "target"
+                          }
+                        },
+                        "then_branch": {
+                          "statements": [
+                            {
+                              "targets": [
+                                {
+                                  "name": "low"
+                                }
+                              ],
+                              "value": {
+                                "op": "+",
+                                "left": {
+                                  "name": "mid"
+                                },
+                                "right": {
+                                  "value": 1
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "else_branch": {
+                          "statements": [
+                            {
+                              "targets": [
+                                {
+                                  "name": "high"
+                                }
+                              ],
+                              "value": {
+                                "op": "-",
+                                "left": {
+                                  "name": "mid"
+                                },
+                                "right": {
+                                  "value": 1
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "type": "Module"
+}

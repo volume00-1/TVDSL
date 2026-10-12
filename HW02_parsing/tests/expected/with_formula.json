@@ -1,0 +1,66 @@
+{
+  "declarations": [
+    {
+      "name": "is_positive",
+      "params": [
+        {
+          "name": "x",
+          "type": "int"
+        }
+      ],
+      "returns": [
+        {
+          "name": "b",
+          "type": "int"
+        }
+      ],
+      "requires": null,
+      "ensures": null,
+      "uses": [],
+      "body": {
+        "statements": [
+          {
+            "condition": {
+              "op": ">",
+              "left": {
+                "name": "x"
+              },
+              "right": {
+                "value": 0
+              }
+            },
+            "then_branch": {
+              "statements": [
+                {
+                  "targets": [
+                    {
+                      "name": "b"
+                    }
+                  ],
+                  "value": {
+                    "value": 1
+                  }
+                }
+              ]
+            },
+            "else_branch": {
+              "statements": [
+                {
+                  "targets": [
+                    {
+                      "name": "b"
+                    }
+                  ],
+                  "value": {
+                    "value": 0
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "type": "Module"
+}

@@ -1,0 +1,41 @@
+{
+  "declarations": [
+    {
+      "name": "bad",
+      "params": [
+        {
+          "name": "x",
+          "type": "int"
+        }
+      ],
+      "returns": [
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "requires": null,
+      "ensures": null,
+      "uses": [],
+      "body": {
+        "statements": [
+          {
+            "statements": [
+              {
+                "targets": [
+                  {
+                    "name": "y"
+                  }
+                ],
+                "value": {
+                  "name": "x"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "type": "Module"
+}

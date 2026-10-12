@@ -1,0 +1,89 @@
+{
+  "declarations": [
+    {
+      "name": "compute",
+      "params": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "returns": [
+        {
+          "name": "r",
+          "type": "int"
+        }
+      ],
+      "requires": null,
+      "ensures": null,
+      "uses": [],
+      "body": {
+        "statements": [
+          {
+            "targets": [
+              {
+                "name": "r"
+              }
+            ],
+            "value": {
+              "op": "+",
+              "left": {
+                "op": "*",
+                "left": {
+                  "op": "+",
+                  "left": {
+                    "name": "x"
+                  },
+                  "right": {
+                    "name": "y"
+                  }
+                },
+                "right": {
+                  "op": "-",
+                  "left": {
+                    "name": "x"
+                  },
+                  "right": {
+                    "name": "y"
+                  }
+                }
+              },
+              "right": {
+                "op": "/",
+                "left": {
+                  "op": "*",
+                  "left": {
+                    "value": 2
+                  },
+                  "right": {
+                    "name": "x"
+                  }
+                },
+                "right": {
+                  "name": "y"
+                }
+              }
+            }
+          },
+          {
+            "kind": "assert",
+            "condition": {
+              "op": ">=",
+              "left": {
+                "name": "r"
+              },
+              "right": {
+                "value": 0
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "type": "Module"
+}

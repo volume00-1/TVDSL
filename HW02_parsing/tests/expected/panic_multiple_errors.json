@@ -1,0 +1,71 @@
+{
+  "declarations": [
+    {
+      "name": "recover",
+      "params": [
+        {
+          "name": "x",
+          "type": "int"
+        }
+      ],
+      "returns": [
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "requires": null,
+      "ensures": null,
+      "uses": [],
+      "body": {
+        "statements": [
+          {
+            "targets": [
+              {
+                "name": "y"
+              }
+            ],
+            "value": {
+              "op": "+",
+              "left": {
+                "name": "x"
+              },
+              "right": {
+                "op": "*",
+                "left": {
+                  "value": 0
+                },
+                "right": {
+                  "value": 2
+                }
+              }
+            }
+          },
+          {
+            "targets": [
+              {
+                "name": "y"
+              }
+            ],
+            "value": {
+              "op": "+",
+              "left": {
+                "name": "x"
+              },
+              "right": {
+                "op": "*",
+                "left": {
+                  "value": 0
+                },
+                "right": {
+                  "value": 3
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "type": "Module"
+}

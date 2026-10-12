@@ -1,0 +1,77 @@
+{
+  "declarations": [
+    {
+      "name": "copy",
+      "params": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "x",
+          "type": "int"
+        }
+      ],
+      "returns": [
+        {
+          "name": "r",
+          "type": "int"
+        }
+      ],
+      "requires": null,
+      "ensures": null,
+      "uses": [],
+      "body": {
+        "statements": [
+          {
+            "targets": [
+              {
+                "array": {
+                  "name": "a"
+                },
+                "index": {
+                  "name": "i"
+                }
+              }
+            ],
+            "value": {
+              "name": "x"
+            }
+          },
+          {
+            "targets": [
+              {
+                "name": "r"
+              }
+            ],
+            "value": {
+              "name": "length",
+              "args": [
+                {
+                  "name": "a"
+                }
+              ]
+            }
+          },
+          {
+            "kind": "assert",
+            "condition": {
+              "op": ">=",
+              "left": {
+                "name": "r"
+              },
+              "right": {
+                "value": 0
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "type": "Module"
+}

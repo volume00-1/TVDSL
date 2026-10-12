@@ -40,3 +40,4 @@ Thumbs.db
 *.json
 *.md
 !README.md
+!HW02_parsing/tests/expected/*.json
