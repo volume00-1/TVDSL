@@ -49,7 +49,7 @@ class Formula(Node):
 @dataclass
 class VarDef(Node):
     name: str
-    type: str  # "int" или "int[]"
+    type: Optional[str]  # "int", "int[]" или None до вывода типа
 
 
 @dataclass

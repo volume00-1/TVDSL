@@ -225,6 +225,52 @@ function bad()
         tree, errors = self._analyze(source)
         self.assertGreater(len(errors), 1, "Ожидалось несколько ошибок")
 
+    def test_infers_type_for_unannotated_local(self):
+        """Тип локальной переменной выводится по первому присваиванию."""
+        source = """
+function infer()
+    returns result: int
+{
+    uses value;
+    value = 42;
+    result = value;
+}
+"""
+        tree, errors = self._analyze(source)
+        self.assertEqual(errors, [])
+        self.assertEqual(tree.declarations[0].body.statements[1].targets[0].type, "int")
+
+    def test_unannotated_local_rejects_conflicting_assignment(self):
+        """После вывода типа несовместимое присваивание приводит к ошибке."""
+        source = """
+function infer()
+    returns result: int
+{
+    uses value;
+    value = 42;
+    value = true;
+    result = value;
+}
+"""
+        tree, errors = self._analyze(source)
+        self.assertTrue(any("несовместимые типы" in error for error in errors))
+
+    def test_unannotated_local_does_not_infer_error_type(self):
+        """Ошибочное первое выражение не фиксирует тип unknown-переменной."""
+        source = """
+function infer()
+    returns result: int
+{
+    uses value;
+    value = missing;
+    value = 42;
+    result = value;
+}
+"""
+        tree, errors = self._analyze(source)
+        self.assertTrue(any("missing" in error for error in errors))
+        self.assertEqual(tree.declarations[0].body.statements[2].targets[0].type, "int")
+
 
 class AnnotationTests(unittest.TestCase):
     """Проверка, что AST аннотируется типами."""

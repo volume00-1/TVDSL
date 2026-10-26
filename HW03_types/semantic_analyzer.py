@@ -63,7 +63,8 @@ class SemanticAnalyzer:
         for r in func.returns:
             self.table.add_symbol(Symbol(name=r.name, type=r.type, role="return"))
         for u in func.uses:
-            self.table.add_symbol(Symbol(name=u.name, type=u.type, role="local"))
+            var_type = u.type if u.type else "unknown"
+            self.table.add_symbol(Symbol(name=u.name, type=var_type, role="local"))
 
         # Анализируем тело
         self.visit(func.body)
@@ -106,8 +107,9 @@ class SemanticAnalyzer:
 
     def visit_uses(self, node: Uses):
         for declaration in node.declarations:
+            var_type = declaration.type if declaration.type else "unknown"
             self.table.add_symbol(
-                Symbol(name=declaration.name, type=declaration.type, role="local")
+                Symbol(name=declaration.name, type=var_type, role="local")
             )
 
     def visit_if(self, node: If):
@@ -135,6 +137,13 @@ class SemanticAnalyzer:
         value_type = self.visit(node.value)
         
         for target in node.targets:
+            if isinstance(target, Name):
+                symbol = self.table.lookup(target.name)
+                if symbol and symbol.type == "unknown" and value_type != "error":
+                    symbol.type = value_type
+                    target.type = value_type
+                    continue
+
             target_type = self.visit(target)
             
             # Проверка совместимости типов

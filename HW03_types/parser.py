@@ -138,20 +138,16 @@ class Parser:
         if not name_token:
             return None
         
-        name = name_token.text
-        
-        if not self.expect("COLON"):
-            return None
-        
-        if not self.expect("INT_TYPE"):
-            return None
-        
-        if self.accept("LBRACKET"):
-            if not self.expect("RBRACKET"):
+        if self.accept("COLON"):
+            if not self.expect("INT_TYPE"):
                 return None
-            return ast.VarDef(name, "int[]")
-        
-        return ast.VarDef(name, "int")
+            if self.accept("LBRACKET"):
+                if not self.expect("RBRACKET"):
+                    return None
+                return ast.VarDef(name_token.text, "int[]")
+            return ast.VarDef(name_token.text, "int")
+
+        return ast.VarDef(name_token.text, None)
 
     def statement(self) -> ast.Node | None:
         kind = self.current.kind
