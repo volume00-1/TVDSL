@@ -1,0 +1,30 @@
+module = decl { decl } ;
+decl = [ "function" ] IDENT "(" [ varDefs ] ")" ( "=>" predicate
+      | [ "requires" predicate ] "returns" varDefs
+        [ "ensures" predicate ] [ "uses" varDefs ] block ) ;
+varDefs = varDef { "," varDef } ;
+varDef = IDENT ":" "int" [ "[" "]" ] ;
+statement = assignment | conditional | loop | block | assertion ;
+assignment = IDENT "=" expr ";" | IDENT "[" expr "]" "=" expr ";"
+           | IDENT { "," IDENT } "=" call ";" ;
+conditional = "if" "(" predicate ")" statement [ "else" statement ] ;
+loop = "while" "(" predicate ")" [ "invariant" predicate ] statement ;
+block = "{" { statement } "}" ;
+assertion = ("assert" | "assume") predicate ";" ;
+expr = term { ("+" | "-") term } ;
+term = unary { ("*" | "/") unary } ;
+unary = "-" unary | primary ;
+primary = INT | IDENT | IDENT "[" expr "]" | call | "(" predicate ")" ;
+call = (IDENT | "length") "(" [ expr { "," expr } ] ")" ;
+predicate = implies ;
+implies = or [ "->" implies ] ;
+or = and { "or" and } ;
+and = not { "and" not } ;
+not = "not" not | atom ;
+atom = "true" | "false" | expr cmp expr | "(" implies ")"
+      | quantifier ;
+cmp = "==" | "!=" | ">=" | "<=" | ">" | "<" ;
+quantifier = ("forall" | "exists") "(" varDef "|" predicate ")" ;
+
+Приоритет: unary "-", "*" "/", "+" "-" (левоассоциативны);
+not, and, or (and/or левоассоциативны), -> (правоассоциативен).

@@ -1,0 +1,5 @@
+function bad()
+    returns r: int
+{
+    r = x + true;
+}
